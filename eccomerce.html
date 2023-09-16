@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title> E-commerce Teste </title>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+	<div id="carregando"></div>
+	<div id="urlContent">
+		<a href="#" onclick"alteraURL('pagina.html');">Exemplo</a>
+	</div>
+</body>
+</html>
+
+<script language="javascript">
+
+	var xmlhttp = getXmlHttpRequest();
+
+	function getXmlHttpRequest(){
+		if(window.XMLHttpRequest){
+			return new XMLHttpRequest();
+		} else if(window.ActiveXObject){
+			return new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	}
+	
+	function alteraURL(url){
+		document.getElementById("carregando").innerHTML = "<img src='carregando.gif'>";
+		xmlhttp.open("POST", url, true);
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState==4){
+				document.getElementById("urlContent").innerHTML = xmlhttp.responseText;
+				document.getElementByid("carregando").innerHTML = "";
+			}
+		}
+		xmlhttp.send(null);
+	}
+</script>
